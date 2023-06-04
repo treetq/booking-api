@@ -5,6 +5,7 @@ import authRouter from "./routes/auth.js";
 import usersRouter from "./routes/users.js";
 import hotelsRouter from "./routes/hotels.js";
 import roomsRouter from "./routes/rooms.js";
+import cookieParser from "cookie-parser";
 const app = express();
 
 dotenv.config();
@@ -23,6 +24,7 @@ mongoose.connection.on("disconnected", () => {
 });
 
 //middlewares
+app.use(cookieParser());
 app.use(express.json());
 app.use("/api/auth", authRouter);
 app.use("/api/users", usersRouter);
@@ -40,7 +42,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(8800, () => {
+app.listen(process.env.PORT, () => {
   connect();
-  console.log("Connected to backend.");
+  console.log(`Connected to backend on port ${process.env.PORT}`);
 });
