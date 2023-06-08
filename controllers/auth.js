@@ -29,6 +29,7 @@ export const login = async (req, res, next) => {
       req.body.password,
       user.password
     );
+    console.log(!isPasswordCorrect);
     if (!isPasswordCorrect)
       return next(createError(400, "Wrong password or username!"));
 
